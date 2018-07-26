@@ -23,7 +23,7 @@
 	<key>MinimumOSVersion</key>
 	<string>8.0</string>
 	<key>CFBundleDisplayName</key>
-	<string>SensoComum.Mobile.Forms</string>
+	<string>Senso Comum</string>
 	<key>CFBundleIdentifier</key>
 	<string>com.ricardoserradas.sensocomum</string>
 	<key>CFBundleVersion</key>

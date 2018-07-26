@@ -52,7 +52,7 @@
     <MtouchDebug>true</MtouchDebug>
     <CodesignEntitlements>
     </CodesignEntitlements>
-    <CodesignProvision>VS: com.companyname.SensoComum.Mobile.Forms Development</CodesignProvision>
+    <CodesignProvision>VS: com.ricardoserradas.sensocomum Development</CodesignProvision>
     <CodesignExtraArgs />
     <CodesignResourceRules />
   </PropertyGroup>
