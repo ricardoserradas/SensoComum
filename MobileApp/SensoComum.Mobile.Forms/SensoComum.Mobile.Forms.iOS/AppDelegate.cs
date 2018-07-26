@@ -1,6 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.AppCenter;
+using Microsoft.AppCenter.Analytics;
+using Microsoft.AppCenter.Crashes;
+using Microsoft.AppCenter.Push;
 
 using Foundation;
 using UIKit;
@@ -23,6 +27,9 @@ namespace SensoComum.Mobile.Forms.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             global::Xamarin.Forms.Forms.Init();
+
+            AppCenter.Start("4965a711-59b5-4b5b-9171-fa424cfe944c", typeof(Analytics), typeof(Crashes), typeof(Push));
+
             LoadApplication(new App());
 
             return base.FinishedLaunching(app, options);
