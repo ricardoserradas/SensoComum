@@ -27,3 +27,6 @@ https://jenkins.io/blog/2017/04/20/secure-jenkins-on-azure/#securely-log-in-to-j
 ## How do I resolve a PathTooLongException error?
 
 https://docs.microsoft.com/en-us/xamarin/android/troubleshooting/questions/path-too-long-exception
+
+## Remoted iOS Simulator for Windows
+https://docs.microsoft.com/pt-br/xamarin/tools/ios-simulator
