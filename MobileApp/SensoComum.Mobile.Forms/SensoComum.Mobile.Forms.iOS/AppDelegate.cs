@@ -28,6 +28,27 @@ namespace SensoComum.Mobile.Forms.iOS
         {
             global::Xamarin.Forms.Forms.Init();
 
+            if (!AppCenter.Configured)
+            {
+                Push.PushNotificationReceived += (sender, e) =>
+                {
+                    var summary = $"Push notification received: " +
+                        $"\n\tTitle: {e.Title}" +
+                        $"\n\tMessage: {e.Message}";
+
+                    if(e.CustomData != null)
+                    {
+                        summary += "\n\tCustom data:\n";
+                        foreach(var key in e.CustomData.Keys)
+                        {
+                            summary += $"\t\t{key} : {e.CustomData[key]}\n";
+                        }
+                    }
+
+                    System.Diagnostics.Debug.WriteLine(summary);
+                };                
+            }
+
             AppCenter.Start("4965a711-59b5-4b5b-9171-fa424cfe944c", typeof(Analytics), typeof(Crashes), typeof(Push));
 
             LoadApplication(new App());

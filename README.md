@@ -30,3 +30,12 @@ https://docs.microsoft.com/en-us/xamarin/android/troubleshooting/questions/path-
 
 ## Remoted iOS Simulator for Windows
 https://docs.microsoft.com/pt-br/xamarin/tools/ios-simulator
+
+## Code signing for iOS
+https://docs.microsoft.com/en-us/appcenter/build/ios/code-signing
+
+## App Center & iOS: Where do I get the code signing files I need?
+https://docs.microsoft.com/en-us/appcenter/build/ios/uploading-signing-files#getting-a-certificate-from-apple-developer-center
+
+## Manual provisioning for Xamarin.iOS
+https://docs.microsoft.com/pt-br/xamarin/ios/get-started/installation/device-provisioning/manual-provisioning?tabs=vsmac

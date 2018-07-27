@@ -177,4 +177,7 @@
       <Name>SensoComum.Mobile.Forms</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\20170418_083549.jpg" />
+  </ItemGroup>
 </Project>
