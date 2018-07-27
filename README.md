@@ -39,3 +39,9 @@ https://docs.microsoft.com/en-us/appcenter/build/ios/uploading-signing-files#get
 
 ## Manual provisioning for Xamarin.iOS
 https://docs.microsoft.com/pt-br/xamarin/ios/get-started/installation/device-provisioning/manual-provisioning?tabs=vsmac
+
+## Use the Azure storage emulator for development and testing
+https://docs.microsoft.com/pt-br/azure/storage/common/storage-use-emulator
+
+## Work with Azure Functions Core Tools
+https://docs.microsoft.com/en-us/azure/azure-functions/functions-run-local
