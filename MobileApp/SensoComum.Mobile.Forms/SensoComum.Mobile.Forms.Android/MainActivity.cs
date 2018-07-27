@@ -6,6 +6,10 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
+using Microsoft.AppCenter;
+using Microsoft.AppCenter.Analytics;
+using Microsoft.AppCenter.Crashes;
+using Microsoft.AppCenter.Push;
 
 namespace SensoComum.Mobile.Forms.Droid
 {
@@ -14,6 +18,8 @@ namespace SensoComum.Mobile.Forms.Droid
     {
         protected override void OnCreate(Bundle bundle)
         {
+            AppCenter.Start("06c2f1ed-8ad4-4595-9830-9e4ea002cdd3", typeof(Analytics), typeof(Crashes), typeof(Push));
+
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
 
