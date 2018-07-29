@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Azure;
 using Microsoft.Extensions.Configuration;
 using Microsoft.WindowsAzure;
 using Microsoft.WindowsAzure.Storage;
@@ -44,7 +43,17 @@ namespace SensoComum.APIs.Commands.Controllers
             // https://docs.microsoft.com/en-us/azure/storage/queues/storage-dotnet-how-to-use-queues#create-a-queue
             // https://stackoverflow.com/questions/30575689/how-do-we-use-cloudconfigurationmanager-with-asp-net-5-json-configs#30580006
 
-            CloudStorageAccount storageAccount = this.configuration.Get(typeof(string), ;
+            CloudStorageAccount storageAccount = CloudStorageAccount.Parse(this.configuration["AppSettings:ConnectionStrings:StorageQueueConnection"]);
+
+            CloudQueueClient queueClient = storageAccount.CreateCloudQueueClient();
+
+            CloudQueue queue = queueClient.GetQueueReference(this.configuration["AppSettings:QueueName"]);
+
+            queue.CreateIfNotExistsAsync();
+
+            CloudQueueMessage message = new CloudQueueMessage(value);
+
+            queue.AddMessageAsync(message);
         }
 
         // PUT api/values/5

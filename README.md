@@ -45,3 +45,7 @@ https://docs.microsoft.com/pt-br/azure/storage/common/storage-use-emulator
 
 ## Work with Azure Functions Core Tools
 https://docs.microsoft.com/en-us/azure/azure-functions/functions-run-local
+
+## Problems with ASP.Net Core 2.1.1
+
+I ran into problems while debugging this ASP.Net Core 2.1.1 Web API. To solve the problem, I needed to edit the .csproj file and explicitly specify the version "2.1.0". It then worked.
