@@ -4,16 +4,33 @@ using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Host;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Table;
+using Microsoft.Extensions.Configuration;
 
 namespace SensoComum.APIs.ProcessValues
 {
     public static class ProcessQueue
     {
+        private static IConfiguration _configuration;
+
         [FunctionName("ProcessQueue")]
-        public static async Task Run([QueueTrigger("values", Connection = "AzureWebJobsStorage")]string myQueueItem, TraceWriter log)
+        public static async Task Run([QueueTrigger("values", Connection = "AzureWebJobsStorage")]string myQueueItem, TraceWriter log, ExecutionContext executionContext)
         {
+            SetupConfigurationManager(executionContext);
+
             int.TryParse(myQueueItem, out int value);
 
+            if(value == 0)
+            {
+                log.Info("Non-string or zero as a value on queue. Dequeuing...");
+            }
+            else
+            {
+                await SumUp(value);
+            }
+        }
+
+        private static async Task SumUp(int value)
+        {
             CloudTable table = await RetrieveCloudTableInstance();
 
             CommonSenseResult commonSenseValue = await RetrieveCommonSenseValue(table);
@@ -21,6 +38,15 @@ namespace SensoComum.APIs.ProcessValues
             commonSenseValue.Update(value);
 
             await UpdateCommonSense(table, commonSenseValue);
+        }
+
+        private static void SetupConfigurationManager(ExecutionContext executionContext)
+        {
+            _configuration = new ConfigurationBuilder()
+                            .SetBasePath(executionContext.FunctionAppDirectory)
+                            .AddJsonFile("local.settings.json", optional: true, reloadOnChange: true)
+                            .AddEnvironmentVariables()
+                            .Build();
         }
 
         private static async Task<CommonSenseResult> RetrieveCommonSenseValue(CloudTable table)
@@ -45,7 +71,7 @@ namespace SensoComum.APIs.ProcessValues
 
         private static async Task<CloudTable> RetrieveCloudTableInstance()
         {
-            string connectionString = "DefaultEndpointsProtocol=https;AccountName=scapisstoragedev;AccountKey=RmYV4v06YsQJkUbs9Kp5L5WlwSKQo4LUI0XIV8q21nl3pfjHkoFuSYFz2zRV8CdrzhfqsJTtHlidr7wBDfeOyg==;EndpointSuffix=core.windows.net";
+            string connectionString = _configuration["AzureWebJobsStorage"];
 
             CloudStorageAccount storageAccount = CloudStorageAccount.Parse(connectionString);
             CloudTableClient tableClient = storageAccount.CreateCloudTableClient();
