@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2042
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SensoComum.APIs.Commands", "SensoComum.APIs.Commands\SensoComum.APIs.Commands.csproj", "{82C2BA74-B9C1-4122-8B91-B63DD044B1EC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SensoComum.APIs.Commands", "SensoComum.APIs.Commands\SensoComum.APIs.Commands.csproj", "{82C2BA74-B9C1-4122-8B91-B63DD044B1EC}"
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{CE11EAF6-F915-4BD2-AAE0-A3E7C72C9B6E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SensoComum.APIs.ProcessQueue", "..\SensoComum.APIs.ProcessQueue\SensoComum.APIs.ProcessQueue.csproj", "{7ECF4E12-511A-42A0-9F57-A3C3E3B39B36}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{CE11EAF6-F915-4BD2-AAE0-A3E7C72C9B6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CE11EAF6-F915-4BD2-AAE0-A3E7C72C9B6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CE11EAF6-F915-4BD2-AAE0-A3E7C72C9B6E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7ECF4E12-511A-42A0-9F57-A3C3E3B39B36}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7ECF4E12-511A-42A0-9F57-A3C3E3B39B36}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7ECF4E12-511A-42A0-9F57-A3C3E3B39B36}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7ECF4E12-511A-42A0-9F57-A3C3E3B39B36}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
