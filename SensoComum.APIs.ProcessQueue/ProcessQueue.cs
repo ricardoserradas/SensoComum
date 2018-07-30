@@ -6,10 +6,10 @@ using Microsoft.WindowsAzure.Storage.Table;
 
 namespace SensoComum.APIs.ProcessQueue
 {
-    public static class Function1
+    public static class ProcessQueue
     {
         [FunctionName("ProcessQueue")]
-        public static void Run([QueueTrigger("values", Connection = "")]string myQueueItem, TraceWriter log)
+        public static void Run([QueueTrigger("values", Connection = "AzureWebJobsStorage")]string myQueueItem, TraceWriter log)
         {
             int.TryParse(myQueueItem, out int value);
 
