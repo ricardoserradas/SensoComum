@@ -54,10 +54,8 @@ namespace SensoComum.APIs.ProcessValues
 
             bool tableExists = await table.CreateIfNotExistsAsync();
 
-            if (!tableExists)
+            if (tableExists)
             {
-                await table.CreateIfNotExistsAsync();
-
                 await InitializeCommonSense(table);
             }
 
@@ -66,7 +64,7 @@ namespace SensoComum.APIs.ProcessValues
 
         private static async Task UpdateCommonSense(CloudTable table, CommonSenseResult commonSenseValue)
         {
-            TableOperation tableOperation = TableOperation.InsertOrReplace(commonSenseValue);
+            TableOperation tableOperation = TableOperation.Replace(commonSenseValue);
 
             await table.ExecuteAsync(tableOperation);
         }
