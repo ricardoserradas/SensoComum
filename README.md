@@ -52,3 +52,6 @@ I ran into problems while debugging this ASP.Net Core 2.1.1 Web API. To solve th
 
 ## Develop Azure Functions using Visual Studio
 https://docs.microsoft.com/pt-br/azure/azure-functions/functions-develop-vs
+
+## Update an Entity (Azure Table Storage)
+https://docs.microsoft.com/pt-br/azure/cosmos-db/table-storage-how-to-use-dotnet#replace-an-entity
