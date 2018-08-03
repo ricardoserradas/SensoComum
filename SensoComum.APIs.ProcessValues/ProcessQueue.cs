@@ -35,7 +35,7 @@ namespace SensoComum.APIs.ProcessValues
         {
             var valueTable = new ValueTable(
                 _configuration["AzureWebJobsStorage"]
-                , "currentValue");
+                , _configuration["TableName"]);
 
             await valueTable.InitializeIfNotExists();
 
