@@ -6,3 +6,10 @@ services:
     build:
       context: .
       dockerfile: SensoComum.APIs.Commands/Dockerfile
+
+  sensocomum.apis.queries:
+    image: ${DOCKER_REGISTRY}sensocomumapisqueries
+    build:
+      context: .
+      dockerfile: ../SensoComum.APIs.Queries/Dockerfile
+
