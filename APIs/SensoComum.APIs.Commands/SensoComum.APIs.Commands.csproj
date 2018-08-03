@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\SensoComum.Shared\SensoComum.Shared.csproj" />
+    <ProjectReference Include="..\SensoComum.Shared\SensoComum.Shared.csproj" />
   </ItemGroup>
 
 </Project>
