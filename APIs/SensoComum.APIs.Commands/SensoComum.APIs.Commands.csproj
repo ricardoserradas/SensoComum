@@ -18,4 +18,8 @@
     <PackageReference Include="WindowsAzure.Storage" Version="9.3.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\SensoComum.Shared\SensoComum.Shared.csproj" />
+  </ItemGroup>
+
 </Project>

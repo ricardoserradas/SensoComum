@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.WindowsAzure;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Queue;
+using SensoComum.Shared.Queues;
 
 namespace SensoComum.APIs.Commands.Controllers
 {
@@ -21,51 +22,15 @@ namespace SensoComum.APIs.Commands.Controllers
             this.configuration = configuration;
         }
         
-        // GET api/values
-        [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
-
-        // GET api/values/5
-        [HttpGet("{id}")]
-        public ActionResult<string> Get(int id)
-        {
-            return "value";
-        }
-
         // POST api/values
         [HttpPost]
         public void Post([FromBody] string value)
         {
-            // https://github.com/Azure-Samples/storage-queue-dotnet-pop-receipt/blob/master/dotnet/storage-queue-dotnet-popreceipt/Program.cs
-            // https://docs.microsoft.com/en-us/azure/storage/queues/storage-dotnet-how-to-use-queues#create-a-queue
-            // https://stackoverflow.com/questions/30575689/how-do-we-use-cloudconfigurationmanager-with-asp-net-5-json-configs#30580006
-
-            CloudStorageAccount storageAccount = CloudStorageAccount.Parse(this.configuration["AppSettings:ConnectionStrings:StorageQueueConnection"]);
-
-            CloudQueueClient queueClient = storageAccount.CreateCloudQueueClient();
-
-            CloudQueue queue = queueClient.GetQueueReference(this.configuration["AppSettings:QueueName"]);
-
-            queue.CreateIfNotExistsAsync();
-
-            CloudQueueMessage message = new CloudQueueMessage(value);
-
-            queue.AddMessageAsync(message);
-        }
-
-        // PUT api/values/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
+            new ValueQueue(
+                this.configuration["AppSettings:ConnectionStrings:StorageQueueConnection"],
+                this.configuration["AppSettings:QueueName"]
+                )
+                .AddMessage(value);
         }
     }
 }
