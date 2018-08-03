@@ -1,6 +1,6 @@
 ﻿using Microsoft.WindowsAzure.Storage.Table;
 
-namespace SensoComum.APIs.Queries.Controllers
+namespace SensoComum.Shared.Models
 {
     public class CommonSenseResult : TableEntity
     {
