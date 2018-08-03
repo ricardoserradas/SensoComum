@@ -5,6 +5,8 @@ using Microsoft.Azure.WebJobs.Host;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Table;
 using Microsoft.Extensions.Configuration;
+using SensoComum.Shared.Models;
+using SensoComum.Shared.Tables;
 
 namespace SensoComum.APIs.ProcessValues
 {
@@ -31,13 +33,17 @@ namespace SensoComum.APIs.ProcessValues
 
         private static async Task SumUp(int value)
         {
-            CloudTable table = await RetrieveCloudTableInstance();
+            var valueTable = new ValueTable(
+                _configuration["AzureWebJobsStorage"]
+                , "currentValue");
 
-            CommonSenseResult commonSenseValue = await RetrieveCommonSenseValue(table);
+            await valueTable.InitializeIfNotExists();
+
+            CommonSenseResult commonSenseValue = await valueTable.RetrieveValue("JeepCompass", "JeepCompass");
 
             commonSenseValue.Update(value);
 
-            await UpdateCommonSense(table, commonSenseValue);
+            valueTable.Update(commonSenseValue);
         }
 
         private static void SetupConfigurationManager(ExecutionContext executionContext)
@@ -47,63 +53,6 @@ namespace SensoComum.APIs.ProcessValues
                             .AddJsonFile("local.settings.json", optional: true, reloadOnChange: true)
                             .AddEnvironmentVariables()
                             .Build();
-        }
-
-        private static async Task<CommonSenseResult> RetrieveCommonSenseValue(CloudTable table)
-        {
-            TableOperation retrieveValue = TableOperation.Retrieve<CommonSenseResult>("JeepCompass", "JeepCompass");
-
-            TableResult retrieveResult = await table.ExecuteAsync(retrieveValue);
-
-            CommonSenseResult commonSenseValue;
-
-            if (retrieveResult.Result == null)
-            {
-                commonSenseValue = await InitializeCommonSense(table);
-            }
-            else
-            {
-                commonSenseValue = (CommonSenseResult)retrieveResult.Result;
-            }
-
-            return commonSenseValue;
-        }
-
-        private static async Task<CloudTable> RetrieveCloudTableInstance()
-        {
-            string connectionString = _configuration["AzureWebJobsStorage"];
-
-            CloudStorageAccount storageAccount = CloudStorageAccount.Parse(connectionString);
-            CloudTableClient tableClient = storageAccount.CreateCloudTableClient();
-
-            CloudTable table = tableClient.GetTableReference("currentValue");
-
-            bool tableExists = await table.CreateIfNotExistsAsync();
-
-            if (tableExists)
-            {
-                await InitializeCommonSense(table);
-            }
-
-            return table;
-        }
-
-        private static async Task UpdateCommonSense(CloudTable table, CommonSenseResult commonSenseValue)
-        {
-            TableOperation tableOperation = TableOperation.Replace(commonSenseValue);
-
-            await table.ExecuteAsync(tableOperation);
-        }
-
-        private static async Task<CommonSenseResult> InitializeCommonSense(CloudTable table)
-        {
-            CommonSenseResult senseResult = new CommonSenseResult("JeepCompass");
-
-            TableOperation tableOperation = TableOperation.Insert(senseResult);
-
-            await table.ExecuteAsync(tableOperation);
-
-            return senseResult;
         }
     }
 }

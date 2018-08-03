@@ -54,5 +54,12 @@ namespace SensoComum.Shared.Tables
 
             await table.ExecuteAsync(tableOperation);
         }
+
+        public async void Update(CommonSenseResult commonSenseValue)
+        {
+            TableOperation tableOperation = TableOperation.Replace(commonSenseValue);
+
+            await this._table.ExecuteAsync(tableOperation);
+        }
     }
 }
