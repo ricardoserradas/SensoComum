@@ -6,9 +6,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="1.0.14" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\SensoComum.Shared\SensoComum.Shared.csproj" />
+    <PackageReference Include="SensoComum.Shared" Version="0.1.218.2" />
   </ItemGroup>
   <ItemGroup>
     <None Update="host.json">

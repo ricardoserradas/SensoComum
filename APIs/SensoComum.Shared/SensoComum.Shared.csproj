@@ -2,6 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <Authors>Ricardo Serradas</Authors>
+    <Product>Senso Comum</Product>
   </PropertyGroup>
 
   <ItemGroup>
