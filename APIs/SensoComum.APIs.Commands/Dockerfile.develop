@@ -1,0 +1,17 @@
+FROM microsoft/dotnet:2.1-sdk
+ENV ASPNETCORE_ENVIRONMENT=Development
+ENV DOTNET_USE_POLLING_FILE_WATCHER=true
+
+EXPOSE 80
+
+WORKDIR /src
+COPY ["SensoComum.APIs.Commands/SensoComum.APIs.Commands.csproj", "SensoComum.APIs.Commands/"]
+COPY ["SensoComum.Shared/SensoComum.Shared.csproj", "SensoComum.Shared/"]
+
+RUN dotnet restore "SensoComum.Shared/SensoComum.Shared.csproj" -nowarn:msb3202,nu1503
+RUN dotnet restore "SensoComum.APIs.Commands/SensoComum.APIs.Commands.csproj" -nowarn:msb3202,nu1503
+COPY . .
+WORKDIR "/src/SensoComum.APIs.Commands"
+RUN dotnet build "SensoComum.APIs.Commands.csproj"
+
+CMD ["dotnet", "run", "--no-restore", "--no-build", "--no-launch-profile"]
