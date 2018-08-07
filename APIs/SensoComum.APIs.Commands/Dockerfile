@@ -5,10 +5,10 @@ EXPOSE 44375
 
 FROM microsoft/dotnet:2.1-sdk AS build
 WORKDIR /src
-COPY SensoComum.APIs.Commands/SensoComum.APIs.Commands.csproj SensoComum.APIs.Commands/
-RUN dotnet restore SensoComum.APIs.Commands/SensoComum.APIs.Commands.csproj
-COPY . .
-WORKDIR /src/SensoComum.APIs.Commands
+COPY SensoComum.APIs.Commands.csproj SensoComum.APIs.Commands/
+COPY Nuget.Config ./
+RUN dotnet restore --configfile Nuget.Config SensoComum.APIs.Commands/SensoComum.APIs.Commands.csproj
+COPY . ./
 RUN dotnet build SensoComum.APIs.Commands.csproj -c Release -o /app
 
 FROM build AS publish

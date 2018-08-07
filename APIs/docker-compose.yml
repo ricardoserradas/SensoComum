@@ -2,14 +2,14 @@ version: '3.4'
 
 services:
   sensocomum.apis.commands:
-    image: ${DOCKER_REGISTRY}sensocomumapiscommands
+    image: ${DOCKER_REGISTRY}sc.apis.commands
     build:
-      context: .
-      dockerfile: SensoComum.APIs.Commands/Dockerfile
+      context: ./SensoComum.APIs.Commands
+      dockerfile: Dockerfile
 
   sensocomum.apis.queries:
-    image: ${DOCKER_REGISTRY}sensocomumapisqueries
+    image: ${DOCKER_REGISTRY}sc.apis.queries
     build:
-      context: .
-      dockerfile: ../SensoComum.APIs.Queries/Dockerfile
+      context: ./SensoComum.APIs.Queries
+      dockerfile: Dockerfile
 

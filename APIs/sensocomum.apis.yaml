@@ -1,0 +1,57 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata: 
+  name: sensocomum-apis-commands-deployment-meta
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: sensocomum-apis-commands-deployment
+    spec:
+      containers:
+      - image:  schubdev.azurecr.io/sc.apis.commands
+        name:  sensocomum-apis-commands-container
+        ports:
+        - containerPort: 80
+          name: commands-in
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sensocomum-apis-commands-service-meta
+spec:
+  type: LoadBalancer
+  ports: 
+  - port: 80
+  selector:
+    app: sensocomum-apis-commands-deployment
+---
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: sensocomum-apis-queries-deployment-meta
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: sensocomum-apis-queries-deployment
+    spec:
+      containers:
+      - name: sensocomum-apis-queries
+        image: schubdev.azurecr.io/sc.apis.queries
+        ports:
+        - containerPort: 80
+          name: queries-in
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sensocomum-apis-queries-service-meta
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+  selector:
+    app: sensocomum-apis-queries-deployment

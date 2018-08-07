@@ -5,10 +5,10 @@ EXPOSE 44348
 
 FROM microsoft/dotnet:2.1-sdk AS build
 WORKDIR /src
-COPY ../SensoComum.APIs.Queries/SensoComum.APIs.Queries.csproj ../SensoComum.APIs.Queries/
-RUN dotnet restore ../SensoComum.APIs.Queries/SensoComum.APIs.Queries.csproj
-COPY . .
-WORKDIR /src/../SensoComum.APIs.Queries
+COPY SensoComum.APIs.Queries.csproj SensoComum.APIs.Queries/
+COPY Nuget.Config ./
+RUN dotnet restore --configfile Nuget.Config SensoComum.APIs.Queries/SensoComum.APIs.Queries.csproj
+COPY . ./
 RUN dotnet build SensoComum.APIs.Queries.csproj -c Release -o /app
 
 FROM build AS publish
