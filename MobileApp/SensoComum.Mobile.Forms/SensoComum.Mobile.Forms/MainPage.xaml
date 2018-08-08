@@ -11,8 +11,9 @@
         </OnPlatform>
     </ContentPage.Padding>
     <StackLayout>
-        <Label Text="Some se viu um Jeep Compass!" />
+        <Label Text="Some se viu um Jeep Compass!" />        
         <Label x:Name="subjectViewCount" Text="N/A" />
+        <Button x:Name="refreshSum" Text="Refresh" Clicked="OnRefreshSum" />
         <Button x:Name="sumSubjectView" Text="+" Clicked="OnSubjectView" />
     </StackLayout>
 </ContentPage>
