@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Acr.UserDialogs;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,54 +10,69 @@ namespace SensoComum.Mobile.Forms
 {
 	public partial class MainPage : ContentPage
 	{
-        ApiServiceManager serviceManager;
+		ApiServiceManager serviceManager;
 
-        public MainPage()
+		public MainPage()
 		{
-            InitializeComponent();
+			InitializeComponent();
 
-            this.serviceManager = new ApiServiceManager();
+			this.serviceManager = new ApiServiceManager();
 
-            RefreshSum();
+			RefreshSum();
 		}
 
-        private void OnSubjectView(object sender, EventArgs e)
-        {
-            int viewCount = 0;
+		private async void OnSubjectView(object sender, EventArgs e)
+		{
+			int viewCount = 0;
 
-            try
-            {
-                this.serviceManager.SumToService();
+			try
+			{
+				using (var loading = UserDialogs.Instance.Loading("Aguarde..."))
+				{
+					await this.serviceManager.SumToService(); 
+				}
 
-                int.TryParse(subjectViewCount.Text, out viewCount);
+				int.TryParse(subjectViewCount.Text, out viewCount);
 
-                viewCount++;
+				viewCount++;
 
-                subjectViewCount.Text = viewCount.ToString();
-            }
-            catch (Exception ex)
-            {
-                DisplayAlert("Erro na soma", $"Erro ao somar no serviço: {ex.Message}", "OK");
-            }
-        }
+				subjectViewCount.Text = viewCount.ToString();
+			}
+			catch (Exception ex)
+			{
+				await DisplayAlert("Erro na soma", $"Erro ao somar no serviço: {ex.Message}", "OK");
+			}
+		}
 
-        private async void OnRefreshSum(object sender, EventArgs e)
-        {
-            try
-            {
-                await RefreshSum();
-            }
-            catch (Exception ex)
-            {
-                await DisplayAlert("Erro na atualização", $"Erro ao obter atualização de soma: {ex.Message}", "OK");
-            }
-        }
+		private async void OnRefreshSum(object sender, EventArgs e)
+		{
+			try
+			{
+				await RefreshSum();
+			}
+			catch (Exception ex)
+			{
+				await DisplayAlert("Erro na atualização", $"Erro ao obter atualização de soma: {ex.Message}", "OK");
+			}
+		}
 
-        private async Task RefreshSum()
-        {
-            var currentSum = await this.serviceManager.RefreshDataAsync();
+		private async Task RefreshSum()
+		{
+			using (var loading = UserDialogs.Instance.Loading("Aguarde..."))
+			{
+				var serviceSumString = await this.serviceManager.RefreshDataAsync();
 
-            subjectViewCount.Text = currentSum;
-        }
-    }
+				int currentSum;
+				int serviceSum;
+
+				int.TryParse(serviceSumString, out serviceSum);
+				int.TryParse(subjectViewCount.Text, out currentSum);
+
+				if (serviceSum > currentSum)
+				{
+					subjectViewCount.Text = serviceSumString;
+				}
+			}
+		}
+	}
 }

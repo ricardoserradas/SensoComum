@@ -10,6 +10,7 @@ using Microsoft.AppCenter;
 using Microsoft.AppCenter.Analytics;
 using Microsoft.AppCenter.Crashes;
 using Microsoft.AppCenter.Push;
+using Acr.UserDialogs;
 
 namespace SensoComum.Mobile.Forms.Droid
 {
@@ -19,6 +20,8 @@ namespace SensoComum.Mobile.Forms.Droid
         protected override void OnCreate(Bundle bundle)
         {
             AppCenter.Start("06c2f1ed-8ad4-4595-9830-9e4ea002cdd3", typeof(Analytics), typeof(Crashes), typeof(Push));
+
+            UserDialogs.Init(this);
 
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
