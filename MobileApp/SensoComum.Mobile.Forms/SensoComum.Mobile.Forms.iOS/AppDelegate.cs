@@ -2,12 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AppCenter;
-using Microsoft.AppCenter.Analytics;
-using Microsoft.AppCenter.Crashes;
-using Microsoft.AppCenter.Push;
 
 using Foundation;
 using UIKit;
+using Microsoft.AppCenter.Push;
 
 namespace SensoComum.Mobile.Forms.iOS
 {
@@ -49,11 +47,22 @@ namespace SensoComum.Mobile.Forms.iOS
                 };                
             }
 
-            AppCenter.Start("4965a711-59b5-4b5b-9171-fa424cfe944c", typeof(Analytics), typeof(Crashes), typeof(Push));
-
             LoadApplication(new App());
 
             return base.FinishedLaunching(app, options);
+        }
+
+        public override void DidReceiveRemoteNotification(UIApplication application, NSDictionary userInfo, System.Action<UIBackgroundFetchResult> completionHandler)
+        {
+            var result = Push.DidReceiveRemoteNotification(userInfo);
+            if (result)
+            {
+                completionHandler?.Invoke(UIBackgroundFetchResult.NewData);
+            }
+            else
+            {
+                completionHandler?.Invoke(UIBackgroundFetchResult.NoData);
+            }
         }
     }
 }

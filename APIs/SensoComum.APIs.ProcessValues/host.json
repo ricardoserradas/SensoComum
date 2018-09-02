@@ -1,2 +1,15 @@
 {
+  "version": "2.0",
+  "extensions": {
+    "cosmosDB": {},
+    "eventHubs": {},
+    "http": {},
+    "queues": {
+      "visibilityTimeout": "00:00:10",
+      "maxDequeueCount":  1
+    },
+    "sendGrid": {},
+    "serviceBus": {},
+    "durableTask": {}
+  }
 }

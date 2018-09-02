@@ -17,17 +17,24 @@ namespace SensoComum.APIs.ProcessValues
         [FunctionName("ProcessQueue")]
         public static async Task Run([QueueTrigger("values", Connection = "AzureWebJobsStorage")]string myQueueItem, TraceWriter log, ExecutionContext executionContext)
         {
-            SetupConfigurationManager(executionContext);
-
-            int.TryParse(myQueueItem, out int value);
-
-            if(value == 0)
+            try
             {
-                log.Info("Non-string or zero as a value on queue. Dequeuing...");
+                SetupConfigurationManager(executionContext);
+
+                int.TryParse(myQueueItem, out int value);
+
+                if (value == 0)
+                {
+                    log.Info("Non-string or zero as a value on queue. Dequeuing...");
+                }
+                else
+                {
+                    await SumUp(value);
+                }
             }
-            else
+            catch (Exception ex)
             {
-                await SumUp(value);
+                log.Error(ex.Message);
             }
         }
 

@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using Microsoft.AppCenter;
+using Microsoft.AppCenter.Crashes;
 
 namespace SensoComum.Mobile.Forms
 {
@@ -16,12 +18,24 @@ namespace SensoComum.Mobile.Forms
 		{
 			InitializeComponent();
 
-			this.serviceManager = new ApiServiceManager();
+            // https://docs.microsoft.com/en-us/xamarin/xamarin-forms/platform/device
+
+            this.serviceManager = new ApiServiceManager();
+            sumSubjectView.GestureRecognizers.Add(new TapGestureRecognizer {
+                Command = new Command(() => { OnSubjectView(); }),
+                NumberOfTapsRequired = 1
+            });
+
+            refreshSum.GestureRecognizers.Add(new TapGestureRecognizer
+            {
+                Command = new Command(() => { OnRefreshSum(); }),
+                NumberOfTapsRequired = 1
+            });
 
 			RefreshSum();
 		}
 
-		private async void OnSubjectView(object sender, EventArgs e)
+		private async void OnSubjectView()
 		{
 			int viewCount = 0;
 
@@ -41,10 +55,11 @@ namespace SensoComum.Mobile.Forms
 			catch (Exception ex)
 			{
 				await DisplayAlert("Erro na soma", $"Erro ao somar no serviço: {ex.Message}", "OK");
+                Crashes.TrackError(ex);
 			}
 		}
 
-		private async void OnRefreshSum(object sender, EventArgs e)
+		private async void OnRefreshSum()
 		{
 			try
 			{
@@ -60,18 +75,26 @@ namespace SensoComum.Mobile.Forms
 		{
 			using (var loading = UserDialogs.Instance.Loading("Aguarde..."))
 			{
-				var serviceSumString = await this.serviceManager.RefreshDataAsync();
+                try
+                {
+                    var serviceSumString = await this.serviceManager.RefreshDataAsync();
 
-				int currentSum;
-				int serviceSum;
+                    int currentSum;
+                    int serviceSum;
 
-				int.TryParse(serviceSumString, out serviceSum);
-				int.TryParse(subjectViewCount.Text, out currentSum);
+                    int.TryParse(serviceSumString, out serviceSum);
+                    int.TryParse(subjectViewCount.Text, out currentSum);
 
-				if (serviceSum > currentSum)
-				{
-					subjectViewCount.Text = serviceSumString;
-				}
+                    if (serviceSum > currentSum)
+                    {
+                        subjectViewCount.Text = serviceSumString;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Crashes.TrackError(ex);
+                    throw;
+                }
 			}
 		}
 	}

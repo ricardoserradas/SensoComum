@@ -1,0 +1,66 @@
+﻿:root {
+    --purplish-blue: #6842ff;
+    --greenish-teal: #39c59b;
+    --white: #ffffff;
+    --brownish-grey: #6a6a6a;
+}
+
+.sensoComum {
+    width: 322;
+    height: 52;
+    opacity: 1;
+    font-family: Knockout-HTF69-FullLiteweight;
+    font-size: 48;
+    font-style: normal;
+    color: #FF6A6A6A;
+}
+
+.Text-Style-4 {
+    font-family: Knockout-HTF69-FullLiteweight;
+    font-size: 48px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: 8.6px;
+    color: #6a6a6a;
+    color: var(--brownish-grey);
+}
+
+
+.Text-Style-3 {
+    font-family: Roboto;
+    font-size: 18px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #ffffff;
+    color: var(--white);
+}
+
+
+.Text-Style-2 {
+    font-family: Roboto;
+    font-size: 18px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #6842ff;
+    color: var(--purplish-blue);
+}
+
+
+.Text-Style {
+    font-family: Roboto;
+    font-size: 14px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #bcbcbc;
+}

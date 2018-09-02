@@ -2,18 +2,67 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:SensoComum.Mobile.Forms"
-             x:Class="SensoComum.Mobile.Forms.MainPage">
+             x:Class="SensoComum.Mobile.Forms.MainPage" BackgroundColor="#FF313131">
 
+    <ContentPage.Resources>
+        <!--https://docs.microsoft.com/pt-br/xamarin/xamarin-forms/user-interface/styles/xaml/explicit-->
+        <Color x:Key="brownish-grey">#FF6A6A6A</Color>
+        <Color x:Key="greenish-teal">#FF39C59B</Color>
+        <Color x:Key="purplish-blue">#FF6842FF</Color>
+        <Color x:Key="white">#FFFFFFFF</Color>
+        <OnPlatform x:TypeArguments="x:String" x:Key="Roboto-Bold">
+            <On Platform="Android" Value="Roboto-Bold.ttf#Roboto" />
+            <On Platform="iOS" Value="Roboto-Bold" />
+        </OnPlatform>
+        <OnPlatform x:TypeArguments="x:String" x:Key="Roboto-Regular">
+            <On Platform="Android" Value="Roboto-Regular.ttf#Roboto" />
+            <On Platform="iOS" Value="Roboto-Regular" />
+        </OnPlatform>
+
+        <Style x:Key="TextStyle" TargetType="Label">
+            <Setter Property="FontFamily" Value="{StaticResource Roboto-Regular}" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="TextColor" Value="#BCBCBC" />
+        </Style>
+
+        <Style x:Key="TextStyle2" TargetType="Label">
+            <Setter Property="FontFamily" Value="{StaticResource Roboto-Regular}" />
+            <Setter Property="FontSize" Value="18" />
+            <Setter Property="TextColor" Value="{StaticResource purplish-blue}" />
+        </Style>
+
+        <Style x:Key="TextStyle3" TargetType="Label">
+            <Setter Property="FontFamily" Value="{StaticResource Roboto-Regular}" />
+            <Setter Property="FontSize" Value="18" />
+            <Setter Property="TextColor" Value="{StaticResource white}" />
+        </Style>
+
+        <Style x:Key="TextStyle4" TargetType="Label">
+            <Setter Property="FontFamily" Value="Knockout-HTF69-FullLiteweight.ttf#Knockout-HTF69-FullLiteweight" />
+            <Setter Property="FontSize" Value="48" />
+            <Setter Property="TextColor" Value="{StaticResource brownish-grey}" />
+        </Style>
+    </ContentPage.Resources>
     <ContentPage.Padding>
         <OnPlatform x:TypeArguments="Thickness">
-            <On Platform="iOS" Value="20, 40, 20, 20" />
-            <On Platform="Android" Value="20" />
+            <On Platform="iOS" Value="10, 20, 10, 10" />
+            <On Platform="Android" Value="10" />
         </OnPlatform>
     </ContentPage.Padding>
-    <StackLayout>
-        <Label Text="Some se viu um Jeep Compass!" HorizontalTextAlignment="Center" />        
-        <Label x:Name="subjectViewCount" Text="N/A" HorizontalTextAlignment="Center" />
-        <Button x:Name="refreshSum" Text="Refresh" Clicked="OnRefreshSum" />
-        <Button x:Name="sumSubjectView" Text="+" Clicked="OnSubjectView" />
+    <!--https://docs.microsoft.com/pt-br/xamarin/xamarin-forms/user-interface/layouts/stack-layout-->
+    <StackLayout  BackgroundColor="#FF313131">
+        <StackLayout>
+            <Label Text="SENSO COMUM" HorizontalTextAlignment="Center" Style="{StaticResource TextStyle4}" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" />    
+        </StackLayout>
+
+        <Frame WidthRequest="116" HeightRequest="116" BackgroundColor="{StaticResource white}" CornerRadius="20" VerticalOptions="CenterAndExpand" HorizontalOptions="Center">
+            <Label x:Name="subjectViewCount" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Text="XX" FontFamily="{StaticResource Roboto-Bold}" FontSize="72" FontAttributes="Bold" TextColor="#FF313131"  />
+        </Frame>
+        <StackLayout Spacing="10" >
+            <Label Text="Some se viu um Jeep Compass!" Style="{StaticResource TextStyle2}" HorizontalOptions="CenterAndExpand" VerticalOptions="EndAndExpand" />
+            <Image x:Name="sumSubjectView" Source="https://scapisstoragedev.blob.core.windows.net/app-resources/Images/buttonsum.png" WidthRequest="330" HeightRequest="45" />
+            <Image x:Name="refreshSum" Source="https://scapisstoragedev.blob.core.windows.net/app-resources/Images/buttonrefresh.png" WidthRequest="330" HeightRequest="45" />
+        </StackLayout>
     </StackLayout>
+    
 </ContentPage>
