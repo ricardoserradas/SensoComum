@@ -32,7 +32,14 @@ namespace SensoComum.Mobile.Forms
                 NumberOfTapsRequired = 1
             });
 
-			RefreshSum();
+            try
+            {
+                RefreshSum();
+            }
+            catch (Exception ex)
+            {
+                DisplayAlert("Error while loading the app.", $"Error: {ex.Message}", "OK");
+            }
 		}
 
 		private async void OnSubjectView()
