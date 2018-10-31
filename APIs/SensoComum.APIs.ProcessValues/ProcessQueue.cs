@@ -17,6 +17,7 @@ namespace SensoComum.APIs.ProcessValues
         [FunctionName("ProcessQueue")]
         public static async Task Run([QueueTrigger("values", Connection = "AzureWebJobsStorage")]string myQueueItem, TraceWriter log, ExecutionContext executionContext)
         {
+            // The AzureWebJobsStorage must be a key in your Function. Its value should be the Storage Connection String.
             try
             {
                 SetupConfigurationManager(executionContext);

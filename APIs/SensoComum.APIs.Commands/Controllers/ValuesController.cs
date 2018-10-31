@@ -26,6 +26,11 @@ namespace SensoComum.APIs.Commands.Controllers
         [HttpPost]
         public void Post([FromBody] string value)
         {
+            if(this.configuration["AppSettings:ConnectionStrings:StorageQueueConnection"] == string.Empty)
+            {
+                throw new ArgumentNullException("You must first fill in your Storage Queue Connection string and Queue Name. See more: https://docs.microsoft.com/pt-br/azure/storage/common/storage-account-manage#access-keys");
+            }
+
             new ValueQueue(
                 this.configuration["AppSettings:ConnectionStrings:StorageQueueConnection"],
                 this.configuration["AppSettings:QueueName"]

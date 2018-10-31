@@ -6,7 +6,12 @@ namespace SensoComum.Mobile.Forms
 {
     public class Constants
     {
-        public static string GetService = "http://13.77.156.155/api/Values";
-        public static string PostService = "http://52.183.10.86/api/Values";
+        // Fill GetService with the URL of the Get API for obtaining data
+        // It should be the Queries API
+        public static string GetService = "https://GET.API.URL";
+
+        // Fill PostService with the URL of the Post API for obtaining data
+        // It should be the Commands API
+        public static string PostService = "https://POST.API.URL";
     }
 }

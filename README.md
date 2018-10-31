@@ -1,5 +1,15 @@
 # SensoComum
-App para contabilizar visualizações de um determinado assunto
+App to sum up a value, remotely, concurrency-aware. To do so, APIs, Functions, Storage Tables and Queues were used.
+
+# First steps
+
+In order to make the apps and the APIs work, you need to set up some configuration values before deploying it. Take a look at these files:
+
+- APIs/SensoComum.APIs.Commands/appsettings.json
+- APIs/SensoComum.APIs.Queries/appsettings.json
+- MobileApp/SensoComum.Mobile.Forms/SensoComum.Mobile.Forms/Constants.cs
+
+Take a look at [this link](https://docs.microsoft.com/pt-br/azure/storage/common/storage-account-manage#access-keys) to know more about getting your storage connection string:
 
 # Knowledge Base
 

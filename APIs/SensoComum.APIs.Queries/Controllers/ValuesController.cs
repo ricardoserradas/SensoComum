@@ -26,6 +26,11 @@ namespace SensoComum.APIs.Queries.Controllers
         [HttpGet]
         public async Task<ActionResult<string>> Get()
         {
+            if (this.configuration["AppSettings:ConnectionStrings:StorageTableConnection"] == "")
+            {
+                throw new ArgumentNullException("You must first fill in your Storage Table Connection string and Queue Name. See more: https://docs.microsoft.com/pt-br/azure/storage/common/storage-account-manage#access-keys");
+            }
+
             CommonSenseResult currentResult = await new ValueTable(
                 this.configuration["AppSettings:ConnectionStrings:StorageTableConnection"]
                 , this.configuration["AppSettings:TableName"]
