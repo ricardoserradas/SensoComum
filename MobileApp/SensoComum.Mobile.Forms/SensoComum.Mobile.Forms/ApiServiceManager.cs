@@ -38,7 +38,8 @@ namespace SensoComum.Mobile.Forms
             return content;
         }
 
-        public async Task SumToService()
+        public async void SumToService()
+
         {
             var uri = new Uri(Constants.PostService);
 

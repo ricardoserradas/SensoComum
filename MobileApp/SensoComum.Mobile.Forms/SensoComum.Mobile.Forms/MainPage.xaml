@@ -49,20 +49,11 @@
             <On Platform="Android" Value="10" />
         </OnPlatform>
     </ContentPage.Padding>
-    <!--https://docs.microsoft.com/pt-br/xamarin/xamarin-forms/user-interface/layouts/stack-layout-->
-    <StackLayout  BackgroundColor="#FF313131">
-        <StackLayout>
-            <Label Text="SENSO COMUM" HorizontalTextAlignment="Center" Style="{StaticResource TextStyle4}" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" />    
-        </StackLayout>
-
-        <Frame WidthRequest="116" HeightRequest="116" BackgroundColor="{StaticResource white}" CornerRadius="20" VerticalOptions="CenterAndExpand" HorizontalOptions="Center">
-            <Label x:Name="subjectViewCount" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Text="XX" FontFamily="{StaticResource Roboto-Bold}" FontSize="72" FontAttributes="Bold" TextColor="#FF313131"  />
-        </Frame>
-        <StackLayout Spacing="10" >
-            <Label Text="Some se viu um Jeep Compass!" Style="{StaticResource TextStyle2}" HorizontalOptions="CenterAndExpand" VerticalOptions="EndAndExpand" />
-            <Image x:Name="sumSubjectView" Source="https://scapisstoragedev.blob.core.windows.net/app-resources/Images/buttonsum.png" WidthRequest="330" HeightRequest="45" />
-            <Image x:Name="refreshSum" Source="https://scapisstoragedev.blob.core.windows.net/app-resources/Images/buttonrefresh.png" WidthRequest="330" HeightRequest="45" />
-        </StackLayout>
+    <StackLayout>
+        <Label Text="Some se viu um Jeep Compass!" />        
+        <Label x:Name="subjectViewCount" Text="N/A" />
+        <Button x:Name="refreshSum" Text="Refresh" Clicked="OnRefreshSum" />
+        <Button x:Name="sumSubjectView" Text="+" Clicked="OnSubjectView" />
     </StackLayout>
     
 </ContentPage>
